@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Julius searchbar extension",
+  "version": "1.0.1",
+  "description": "allow use of certain kewords in the omnibox",
+  "omnibox": { "keyword" : "key" },
+  "background": {
+    "service_worker": "background.js"
+  }
