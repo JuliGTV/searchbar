@@ -7,6 +7,10 @@ function suggestions(text) {
     return sgtns
 }
 
+chrome.omnibox.onInputStarted.addListener(function() {
+    chrome.omnibox.setDefaultSuggestion({description: "Select one of the options below."})
+})
+
 
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
     suggest(suggestions(text))
@@ -15,3 +19,7 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 chrome.omnibox.onInputEntered.addListener(function(text) {
     chrome.tabs.update({url: text});
 })
+
+
+
+// url: "https://imgur.com/a/O25jaEb", 
