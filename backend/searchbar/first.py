@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 suggestions = [
     {'deletable': True, 'content': "https://imgur.com/a/O25jaEb", 'description': "Zebedee"},
@@ -12,3 +14,4 @@ suggestions = [
 @app.route('/suggestions')
 def get_suggestions():
     return jsonify(suggestions)
+    # return("hello world")
