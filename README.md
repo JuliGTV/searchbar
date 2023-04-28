@@ -9,3 +9,7 @@ Or, click the Chrome menu, hover over More Tools, then select Extensions.
 Enable Developer Mode by clicking the toggle switch next to Developer mode.
 
 Click the Load unpacked button and select the directory searchbar/chrome
+
+
+
+To use the extension simply enter 'key' in the omnibox (URL bar) followed by a space or tab and some further text of your choice and then select one of the options below
