@@ -3,16 +3,18 @@ chrome.omnibox.onInputStarted.addListener(function() {
     chrome.omnibox.setDefaultSuggestion({description: "Click below"})
 })
 
-
+var text2
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {            ///////////something is going on that fails in the translate case
-    fetch("http://127.0.0.1:5000/suggestions/q=" + encodeURIComponent(text))
+    text2 = text
+    suggest([{'content': "https://www.google.com/search?q=" + text, 'description': "input "+ text}])   //weird slicing necessary to get valid url for some reason (remove "")
+})
+
+
+chrome.omnibox.onInputEntered.addListener(function(text) {
+    fetch("http://127.0.0.1:5000/suggestions/q=" + encodeURIComponent(text2))
     .then(res => res.text())
     .then(data => {
     console.log(data)
-    suggest([{'content': data.slice(1,-2), 'description': 'go to: ' + data.slice(1,-2)}])   //weird slicing necessary to get valid url for some reason (remove "")
+    chrome.tabs.update({'url': data.slice(1,-2)})
 })
-})
-
-chrome.omnibox.onInputEntered.addListener(function(text) {
-    chrome.tabs.update({'url': text})
 }) 
