@@ -1,10 +1,10 @@
 
 chrome.omnibox.onInputStarted.addListener(function() {
-    chrome.omnibox.setDefaultSuggestion({description: "Select one of the options below."})
+    chrome.omnibox.setDefaultSuggestion({description: "Click below"})
 })
 
 
-chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
+chrome.omnibox.onInputChanged.addListener(function(text, suggest) {            ///////////something is going on that fails in the translate case
     fetch("http://127.0.0.1:5000/suggestions/q=" + encodeURIComponent(text))
     .then(res => res.text())
     .then(data => {
