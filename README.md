@@ -12,4 +12,10 @@ Click the Load unpacked button and select the directory searchbar/chrome
 
 
 
-To use the extension simply enter 'key' in the omnibox (URL bar) followed by a space or tab and some further text of your choice and then select one of the options below
+To use the extension simply enter 'key' in the omnibox (URL bar) followed by a space or tab and then one one of the following keys plus some input:
+
+
+key   effect
+yt: youtube search
+tr: translate to english
+zeb: Zebedee the cat
