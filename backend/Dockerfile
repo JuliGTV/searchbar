@@ -14,5 +14,5 @@ COPY searchbar ./searchbar
 RUN pipenv install --system --deploy
 
 # Start app
-EXPOSE 5000
+EXPOSE 8080
 ENTRYPOINT ["/usr/src/app/bootstrap.sh"]
