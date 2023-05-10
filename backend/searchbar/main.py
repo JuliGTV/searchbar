@@ -14,3 +14,11 @@ interface = TableInterface(project, bt_instance, bt_table, key)
 def get_suggestions(input):
     return jsonify(search(unquote(input),interface))      # handles most special characters but fails on / 
     # return("hello world") 
+
+@app.route('/input-suggestion', methods = ['POST'])
+def new_suggestion():
+    print("messaged received ")
+    data = request.get_data()
+    print(data)
+    return jsonify("recieved")
+print("sup?")

@@ -2,7 +2,7 @@
 
 function submit(input1, input2) { 
     console.log(input1.value + "   " + input2.value);
-    chrome.runtime.sendMessage(message = {input1 : input2})
+    chrome.runtime.sendMessage(message = {[input1.value] : input2.value})
     // console.log("Triggered!!!")
 }
 console.log("something")

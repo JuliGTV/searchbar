@@ -18,3 +18,12 @@ chrome.omnibox.onInputEntered.addListener(function(text) {
     chrome.tabs.update({'url': data.slice(1,-2)})       //weird slicing necessary to get valid url for some reason (remove "")
 })
 }) 
+
+chrome.runtime.onMessage.addListener(function(message){
+    console.log("message recieved")
+    console.log(JSON.stringify(message))
+    fetch("http://127.0.0.1:8080/input-suggestion", {                                 //"https://searchbar-iaklo4m3da-uc.a.run.app/input-suggestion",{
+        method: "POST",
+        body: JSON.stringify(message)
+    })
+})
