@@ -1,12 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Julius searchbar extension",
+  "name": "Julius searchbar extension database",
   "version": "1.0.1",
   "description": "allow use of certain kewords in the omnibox",
-  "omnibox": { "keyword" : "key" },
+  "omnibox": { "keyword" : "dk" },
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["http://127.0.0.1:5000/*"],  
+  "host_permissions": ["http://127.0.0.1:5000/*"], 
+  "action": {
+    "default_popup": "popup.html"
+  },
   "permissions": ["tabs"]
 }
