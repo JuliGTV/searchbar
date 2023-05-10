@@ -11,7 +11,7 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
-    fetch("https://searchbar-iaklo4m3da-uc.a.run.app/suggestions/q=" + encodeURIComponent(text2))
+    fetch("http://127.0.0.1:8080/suggestions/q=" + encodeURIComponent(text2))
     .then(res => res.text())
     .then(data => {
     console.log(data)
@@ -26,4 +26,4 @@ chrome.runtime.onMessage.addListener(function(message){
         method: "POST",
         body: JSON.stringify(message)
     })
-})
+}) 

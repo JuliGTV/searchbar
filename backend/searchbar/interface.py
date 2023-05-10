@@ -21,6 +21,16 @@ class TableInterface():
         _, cd = celldict.popitem()
         _, cell = cd.popitem()
         return cell[0].value.decode('utf8')
+    
+    def new_cell(self, key, url):
+        row = self._table.row('URL'.encode())
+        print(url)
+        row.set_cell('general_keys', key, (url.encode()))
+        row.commit()
+
+
+
+
 
 
 

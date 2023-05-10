@@ -4,6 +4,7 @@ from urllib.parse import unquote
 from searchbar.search import search
 from searchbar.var import *
 from searchbar.interface import TableInterface
+import json
 
 app = Flask('searchbar')
 CORS(app)
@@ -20,5 +21,8 @@ def new_suggestion():
     print("messaged received ")
     data = request.get_data()
     print(data)
+    newdict = json.loads(data)
+    k, url = newdict.popitem()
+    interface.new_cell(k, url)
     return jsonify("recieved")
-print("sup?")
+print("sup?")  

@@ -11,5 +11,6 @@ def search(text, interface):
     if not text: return "https://www.google.com/search?q="
     template = interface.get_cell('URL', key)
     if not template: return defaultURL(content)
-    url = template % content
-    return url
+    if '%s' in template:
+        template = template % content
+    return template
