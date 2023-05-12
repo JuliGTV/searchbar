@@ -1,35 +1,34 @@
 //document.addEventListener('DOMContentLoaded', documentEvents  , false);
-
+console.log("something wnflsadnf.,mdnsa.,")
 function submit(input1, input2) { 
     console.log(input1.value + "   " + input2.value);
-    chrome.runtime.sendMessage(message = {[input1.value] : input2.value})
-    // console.log("Triggered!!!")
+    chrome.runtime.sendMessage(message = {'type': 'newkey', 'body': {[input1.value] : input2.value}})
 }
-function isValidUrl(string) {
-  let url;
-  
-  try {
-    url = new URL(string);
-  } catch (_) {
-    return false;  
+
+const isValidUrl = urlString=> {
+  try { 
+    return Boolean(new URL(urlString)); 
   }
-
-  return true;
+  catch(e){ 
+    return false; 
+  }
 }
-   
+ console.log("jksdfjlf")  
 document.getElementById('form').addEventListener('submit', 
-  function() { 
-    var key = document.getElementById('key')
-    var url = document.getElementById('url')
+  function() {
+    
+    // console.log("something else") 
+    // var key = document.getElementById('key')
+    // var url = document.getElementById('url')
 
-    if (key == "" || " " in key){
+    if (key.value == "" || key.value.includes(" ")) {
       alert("Please input a keyword with no spaces.")
-    } else if (!isValidUrl(url)) {
-      alert("Please input a valid URL.")
+    } else if (!isValidUrl(url.value)) {
+      alert("Please input valid url.")
     } else{
       submit(key, url);
     }
-    
+   
     
 });
 

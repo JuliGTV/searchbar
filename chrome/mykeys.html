@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display Key-Value Pairs</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- table data will be inserted here -->
+		</tbody>
+	</table>
+	<script>
+		function getpairs () {
+            
+        }
+        
+        // call the getpairs() function to retrieve key-value pairs
+		var pairs = getpairs();
+
+		// get a reference to the table's tbody element
+		var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+
+		// loop through the key-value pairs and add a new row to the table for each one
+		for (var key in pairs) {
+			if (pairs.hasOwnProperty(key)) {
+				var value = pairs[key];
+				var row = tbody.insertRow();
+				var keyCell = row.insertCell(0);
+				var valueCell = row.insertCell(1);
+				keyCell.innerHTML = key;
+				valueCell.innerHTML = value;
+			}
+		}
+	</script>
+</body>
+</html>
