@@ -22,10 +22,10 @@ class TableInterface():
         _, cell = cd.popitem()
         return cell[0].value.decode('utf8')
     
-    def new_cell(self, key, url):
-        row = self._table.row('URL'.encode())
-        print(url)
-        row.set_cell('general_keys', key, (url.encode()))
+
+    def new_cell(self, row, column, content):
+        row = self._table.row(row.encode())
+        row.set_cell('general_keys', column, (content.encode()))
         row.commit()
 
 

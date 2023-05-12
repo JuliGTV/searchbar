@@ -11,9 +11,9 @@ CORS(app)
 
 interface = TableInterface(project, bt_instance, bt_table, key)
 
-@app.route('/suggestions/q=<input>')
-def get_suggestions(input):
-    return jsonify(search(unquote(input),interface))      # handles most special characters but fails on / 
+@app.route('/suggestions/<user>/q=<input>')
+def get_suggestions(input, user):
+    return jsonify(search(unquote(input), user, interface))      # handles most special characters but fails on / 
     # return("hello world") 
 
 @app.route('/input-suggestion', methods = ['POST'])
@@ -22,7 +22,8 @@ def new_suggestion():
     data = request.get_data()
     print(data)
     newdict = json.loads(data)
-    k, url = newdict.popitem()
-    interface.new_cell(k, url)
+    k, url = newdict['new'].popitem()
+    user = newdict['id']
+    interface.new_cell(user, k, url)     # commented out for testing when db is closed
     return jsonify("recieved")
 print("sup?")  
