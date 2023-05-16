@@ -2,14 +2,13 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from urllib.parse import unquote
 from searchbar.search import search
-from searchbar.var import *
 from searchbar.interface import TableInterface
 import json
 
 app = Flask('searchbar')
 CORS(app)
 
-interface = TableInterface(project, bt_instance, bt_table, key)
+interface = TableInterface('userkeywords')
 
 @app.route('/suggestions/<user>/q=<input>')
 def get_suggestions(input, user):
@@ -24,6 +23,6 @@ def new_suggestion():
     newdict = json.loads(data)
     k, url = newdict['new'].popitem()
     user = newdict['id']
-    interface.new_cell(user, k, url)     # commented out for testing when db is closed
+    interface.new_item(user, k, url)     # commented out for testing when db is closed
     return jsonify("recieved")
 print("sup?")  

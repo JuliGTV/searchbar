@@ -1,35 +1,38 @@
-## query a cell to test
-
-import os
-from datetime import datetime, timedelta
-from google.cloud import bigtable
-import google.cloud.bigtable.row_filters as row_filters
-
+import boto3
+# Get the service resource.
+dynamodb = boto3.resource('dynamodb')
 
 class TableInterface():
-    def __init__(self, project_id, instance_id, table_id, key_path):
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
-        self._client = bigtable.Client(project=project_id)
-        self._instance = self._client.instance(instance_id)
-        self._table = self._instance.table(table_id)
+    def __init__(self, table_name):
+        self.table = dynamodb.Table(table_name)
 
-    def get_cell(self, row, col):
-        col_filter = row_filters.ColumnQualifierRegexFilter(col)
-        cellrow = self._table.read_row(row, filter_=col_filter)
-        if not cellrow: return None
-        celldict = cellrow.cells
-        _, cd = celldict.popitem()
-        _, cell = cd.popitem()
-        return cell[0].value.decode('utf8')
+
+    # return a dictionary style item corresposing to user keyword pair or none if nonexistant
+    def get_item(self, user, kword):
+        response = self.table.get_item(
+            Key={
+                'user': user,
+                'kword': kword
+            }
+        )
+        if not 'item' in response: return None
+        item = response['Item']
+        return item
     
-
-    def new_cell(self, row, column, content):
-        row = self._table.row(row.encode())
-        row.set_cell('general_keys', column, (content.encode()))
-        row.commit()
-
-
-
+    # return the url corresponding to a user keyword pair or none if noneexistant
+    def get_URL(self, user, kword):
+        item = self.getItem(user, kword)
+        if item: return item['url']
+        return None
+    
+    def create_item(self, user, kword, url):
+        self.table.put_item(
+            Item={
+                    'user': user,
+                    'kword': kword,
+                    'url': url
+                }
+            )
 
 
 

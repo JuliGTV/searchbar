@@ -6,9 +6,8 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-cors = "*"
-google-cloud = "*"
-google = "*"
-google-cloud-bigtable = "*"
+boto3 = "*"
+awscli = "*"
 
 [dev-packages]
 
