@@ -9,6 +9,7 @@ flask-cors = "*"
 google-cloud = "*"
 google = "*"
 google-cloud-bigtable = "*"
+boto3 = "*"
 
 [dev-packages]
 

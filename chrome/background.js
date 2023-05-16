@@ -36,6 +36,6 @@ chrome.runtime.onMessage.addListener(function(message){
     console.log(JSON.stringify(message))
     if (message.type = 'newKey') {
         newKey(message.body)
-    }
+    } else if (message.type = 'getKeys') {}
     
 }) 
