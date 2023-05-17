@@ -34,12 +34,9 @@ class TableInterface():
                 }
             )
 
+        
 
+test = TableInterface('userkwords')
 
-
-
-
-
-
-
-
+#print(test.getURL('gen','yt'))
+print(test.get_item('gen','yt'))
