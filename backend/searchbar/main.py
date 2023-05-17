@@ -24,6 +24,6 @@ def new_suggestion():
     newdict = json.loads(data)
     k, url = newdict['new'].popitem()
     user = newdict['id']
-    interface.new_item(user, k, url)     # commented out for testing when db is closed
+    interface.create_item(user, k, url)     # commented out for testing when db is closed
     return jsonify("recieved")
 print("sup?")  
