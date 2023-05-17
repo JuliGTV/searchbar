@@ -8,7 +8,8 @@ import json
 app = Flask('searchbar')
 CORS(app)
 
-interface = TableInterface('userkeywords')
+interface = TableInterface('userkwords')
+
 
 @app.route('/suggestions/<user>/q=<input>')
 def get_suggestions(input, user):
