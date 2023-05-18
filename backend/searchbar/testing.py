@@ -1,42 +1,46 @@
 import boto3
+import json
 # Get the service resource.
 dynamodb = boto3.resource('dynamodb')
-
-class TableInterface():
-    def __init__(self, table_name):
-        self.table = dynamodb.Table(table_name)
+from interface import TableInterface
 
 
-    # return a dictionary style item corresposing to user keyword pair or none if nonexistant
-    def get_item(self, user, kword):
-        response = self.table.get_item(
-            Key={
-                'user': user,
-                'kword': kword
-            }
-        )
-        if not 'Item' in response: return None
-        item = response['Item']
-        return item
-    
-    # return the url corresponding to a user keyword pair or none if noneexistant
-    def get_URL(self, user, kword):
-        item = self.get_item(user, kword)
-        if item: return item['url']
-        return None
-    
-    def create_item(self, user, kword, url):
-        self.table.put_item(
-            Item={
-                    'user': user,
-                    'kword': kword,
-                    'url': url
-                }
-            )
 
-        
+
+
+
 
 test = TableInterface('userkwords')
 
 #print(test.getURL('gen','yt'))
-print(test.get_item('gen','yt'))
+# print(test.get_item('gen','yt'))
+# print(test.get_URL('gen','tr'))
+# print(test.get_URL('gen','trs'))
+
+# # test.create_item('tester','test','testurl')
+
+# print(test.get_URL('tester','test'))
+
+# test.create_group('testeralt', 'testgroup2')
+# print(test.join_group('testeralt', 'testgroup2'))
+# print(test.create_group('testeralt','newgroup'))
+# print(test.get_groups('testeralt'))
+# print(test.group_exists('testgroup'))
+
+# print(test.add_to_group('testeralt','newgroup','groupkword','groupurl'))
+# print(test.add_to_group('testeralt2','newgroup','groupkword2','groupurl2'))
+
+
+
+
+
+
+
+
+
+from search import search
+
+print(search("tr bonjour", 'testeralt', test))
+print(search("groupkword",'testeralt', test))
+#print(test.get_item("tester",'test'))
+
