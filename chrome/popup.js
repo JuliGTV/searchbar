@@ -1,8 +1,13 @@
 //document.addEventListener('DOMContentLoaded', documentEvents  , false);
 console.log("popup.js invoked")
+
 function submit(input1, input2) { 
-    console.log("message sent: "+ input1.value + ":" + input2.value);
-    chrome.runtime.sendMessage(message = {'type': 'newkey', 'body': {[input1.value] : input2.value}})
+  console.log("message sent: "+ input1.value + ":" + input2.value);
+  chrome.runtime.sendMessage(message = {'type': 'newkey', 'body': {[input1.value] : input2.value}})
+}
+
+function getkeys() {
+  chrome.tabs.update({'url': chrome.runtime.getURL('mykeys.html')})
 }
 
 const isValidUrl = urlString=> {
@@ -14,6 +19,8 @@ const isValidUrl = urlString=> {
   }
 }
   
+
+
 document.getElementById('form').addEventListener('submit', 
   function() {
     
@@ -32,3 +39,4 @@ document.getElementById('form').addEventListener('submit',
     
 });
 
+document.getElementById('getkeys').addEventListener('click', getkeys)

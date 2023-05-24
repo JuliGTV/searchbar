@@ -1,5 +1,5 @@
 from urllib.parse import quote
-from interface import TableInterface
+from searchbar.interface import TableInterface
 
 def defaultURL(text): return "https://www.google.com/search?q=" + text
 
@@ -13,7 +13,7 @@ def search(text, user, interface):
     template = interface.get_URL(user, key)
     
     if not template:  
-        groups = interface.get_groups(user)
+        groups = interface.get_user_groups(user)
         for g in groups:
             template = interface.get_URL(g, key)
             if template: continue
