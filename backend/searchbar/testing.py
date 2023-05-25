@@ -17,7 +17,7 @@ test = TableInterface('userkwords')
 # print(test.get_URL('gen','tr'))
 # print(test.get_URL('gen','trs'))
 
-# test.create_item('tester','test','testurl')
+# test.create_key('tester','test','testurl')
 
 # print(test.get_URL('tester','test'))
 
@@ -35,10 +35,10 @@ g = "Juliusgroup3"
 # print(test.create_group("111690761998158306572", g))
 # print(test.get_user_groups("111690761998158306572"))
 # print(test.get_user_groupsowned("111690761998158306572"))
-print(test.add_to_group("111690761998158306572",g,'tkey','turl'))
+# print(test.add_to_group("111690761998158306572",g,'tkey','turl'))
 # print(test.get_user_urls('testeralt'))
 
-
+print(test.group_exists(g))
 
 
 # from search import search

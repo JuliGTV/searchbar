@@ -10,6 +10,10 @@ function getkeys() {
   chrome.tabs.update({'url': chrome.runtime.getURL('mykeys.html')})
 }
 
+function manage_groups() {
+  chrome.tabs.update({'url': chrome.runtime.getURL('groups.html')})
+}
+
 const isValidUrl = urlString=> {
   try { 
     return Boolean(new URL(urlString)); 
@@ -40,3 +44,5 @@ document.getElementById('form').addEventListener('submit',
 });
 
 document.getElementById('getkeys').addEventListener('click', getkeys)
+
+document.getElementById('manage groups').addEventListener('click', manage_groups)

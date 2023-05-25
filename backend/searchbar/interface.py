@@ -27,7 +27,7 @@ class TableInterface():
         if item: return item['url']
         return None
     
-    def create_item(self, user, kword, url):
+    def create_key(self, user, kword, url):
         self.table.put_item(
             Item={
                     'user': user,
@@ -35,6 +35,16 @@ class TableInterface():
                     'url': url
                 }
             )
+        
+    def delete_key(self, user, key):
+        self.table.delete_item(
+            Key={
+                'user': user,
+                'kword': key
+            }
+        )
+        
+
         
     def get_user_urls(self, user):
         filtering_expression = Key('user').eq(user)
@@ -96,6 +106,26 @@ class TableInterface():
         )
         return True
 
+    def leave_group(self, user, group):
+        groups = self.get_user_groups(user)
+        if group not in groups: print("User already not in group"); return False
+        groupsowned = self.get_user_groupsowned(user)
+        groups.remove(group)
+        if group in groupsowned: groupsowned.remove(group)
+        self.table.update_item(
+            Key={
+                'user': user,
+                'kword': '$$groups'
+            },
+            ExpressionAttributeValues={
+                ':val1': json.dumps(groups),
+                ':val2': json.dumps(groupsowned)
+            },
+            UpdateExpression='SET groupsattribute = :val1, groupsowned = :val2'
+        )
+        return True
+        
+        
     def create_group(self, user, groupname):
         if self.group_exists(groupname):
             return False
@@ -112,14 +142,21 @@ class TableInterface():
     def group_exists(self, group):
         return(bool(self.get_item(group, '$$group_metadata')))
 
-    def add_to_group(self, user, group, kword, url):
+    def create_group_key(self, user, group, kword, url):
         meta = self.get_item(group, '$$group_metadata')
         if not meta: print("group does not exist"); return False
         owners = json.loads(meta["owners"])
         if not user in owners: print("User does not own group"); return False
-        self.create_item(group, kword, url)
+        self.create_key(group, kword, url)
         return True
 
+    def delete_group_key(self, user, group, kword):
+            meta = self.get_item(group, '$$group_metadata')
+            if not meta: print("group does not exist"); return False
+            owners = json.loads(meta["owners"])
+            if not user in owners: print("User does not own group"); return False
+            self.delete_key(group, kword)
+            return True
 
 
 

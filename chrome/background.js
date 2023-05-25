@@ -28,8 +28,18 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
     } else if (message.type == 'getkeys') {
         getkeys(sendResponse)
         return true
-    }
-}) 
+    } else if (message.type == 'join') {
+        joinGroup(message.body)
+    } else if (message.type == 'leave') {
+        leaveGroup(message.body)
+    } else if (message.type == 'ngk') {
+        newGroupKey(message.body)
+    } else if (message.type == 'dgk') {
+        deleteGroupKey(message.body)
+    } else if (message.type == 'creategroup') {
+        createGroup(message.body)
+    } else {console.log("unknown message recieved")}
+})
 
 
 
@@ -59,4 +69,65 @@ function getkeys(sendResponse){
             sendResponse(keys)
         })
     })
+}
+
+function joinGroup(group){    
+    chrome.identity.getProfileUserInfo()
+    .then(res => res.id)
+    .then(id => {
+        console.log(`User: ${id} is joining group: ${group}`)
+        fetch(domain + "join_group", {                                 //"https://searchbar-iaklo4m3da-uc.a.run.app/input-suggestion",{
+            method: "POST",
+            body: JSON.stringify({'id': id, 'group':group})
+        })
+    })
+}
+
+function leaveGroup(group){    
+    chrome.identity.getProfileUserInfo()
+    .then(res => res.id)
+    .then(id => {
+        console.log(`User: ${id} is leaving group: ${group}`)
+        fetch(domain + "leave_group", {                                 //"https://searchbar-iaklo4m3da-uc.a.run.app/input-suggestion",{
+            method: "POST",
+            body: JSON.stringify({'id': id, 'group':group})
+        })
+    })
+}
+
+
+function newGroupKey(message){    
+    chrome.identity.getProfileUserInfo()
+    .then(res => res.id)
+    .then(id => {
+        console.log("posting new group kword: " + message + "for user: " + id)
+        fetch(domain + "new_group_key", {                                 //"https://searchbar-iaklo4m3da-uc.a.run.app/input-suggestion",{
+            method: "POST",
+            body: JSON.stringify({'id': id, 'group':message.group, 'key':message.key, 'url':message.url})
+        })
+    })
+}
+
+function deleteGroupKey(message){    
+    chrome.identity.getProfileUserInfo()
+    .then(res => res.id)
+    .then(id => {
+        console.log("posting new delete groupkword: " + message + "for user: " + id)
+        fetch(domain + "delete_group_key", {                                 //"https://searchbar-iaklo4m3da-uc.a.run.app/input-suggestion",{
+            method: "POST",
+            body: JSON.stringify({'id': id, 'group':message.group, 'key':message.key})
+        })
+    })
+}
+
+function createGroup(group){
+    chrome.identity.getProfileUserInfo()
+   .then(res => res.id)
+   .then(id => {
+    console.log(`User: ${id} is creating group: ${group}`)
+    fetch(domain + "create_group", {                                 //"https://searchbar-iaklo4m3da-uc.a.run.app/input-suggestion",{
+        method: "POST",
+        body: JSON.stringify({'id': id, 'group':group})
+    })
+   })
 }
