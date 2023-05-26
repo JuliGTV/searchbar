@@ -7,11 +7,11 @@ function submit(input1, input2) {
 }
 
 function getkeys() {
-  chrome.tabs.update({'url': chrome.runtime.getURL('mykeys.html')})
+  chrome.tabs.create({'url': chrome.runtime.getURL('mykeys.html')})
 }
 
 function manage_groups() {
-  chrome.tabs.update({'url': chrome.runtime.getURL('groups.html')})
+  chrome.tabs.create({'url': chrome.runtime.getURL('groups.html')})
 }
 
 const isValidUrl = urlString=> {
