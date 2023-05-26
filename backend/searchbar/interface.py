@@ -140,7 +140,10 @@ class TableInterface():
         return True
 
     def group_exists(self, group):
-        return(bool(self.get_item(group, '$$group_metadata')))
+        exists = bool(self.get_item(group, '$$group_metadata'))
+        if exists: print(group + " exists")
+        else: print(group + " does not exist")
+        return exists
 
     def create_group_key(self, user, group, kword, url):
         meta = self.get_item(group, '$$group_metadata')

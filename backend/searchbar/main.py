@@ -10,6 +10,9 @@ CORS(app)
 
 interface = TableInterface('userkwords')
 
+@app.route('/hello')
+def hello():
+    return 'Hello World!'
 
 @app.route('/get_url/user=<user>/q=<input>')
 def get_suggestions(input, user):
@@ -46,7 +49,7 @@ def join_group():
     data = request.get_data()
     print(data) 
     dct = json.loads(data)
-    interface.join_group(dct['group'], dct['id'])
+    interface.join_group(dct['id'], dct['group'])
     return jsonify("recieved")
     
 @app.route('/leave_group', methods = ['POST'])
@@ -85,5 +88,5 @@ def create_group():
     data = request.get_data()
     print(data)
     dct = json.loads(data)
-    interface.create_group(dct['id'], dct['group'])
-    return jsonify("recieved")
+    success = interface.create_group(dct['id'], dct['group'])
+    return jsonify(success)

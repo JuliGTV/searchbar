@@ -31,15 +31,16 @@ test = TableInterface('userkwords')
 # print(test.add_to_group('testeralt2','newgroup','groupkword2','groupurl2'))
 
 # print(test.join_group("111690761998158306572", 'testgroup2'))
-g = "Juliusgroup3"
+g = "search-engines"
 # print(test.create_group("111690761998158306572", g))
 # print(test.get_user_groups("111690761998158306572"))
 # print(test.get_user_groupsowned("111690761998158306572"))
 # print(test.add_to_group("111690761998158306572",g,'tkey','turl'))
 # print(test.get_user_urls('testeralt'))
-
-print(test.group_exists(g))
-
+print(test.create_group('search-engine-lover', g))
+test.group_exists(g)
+print(g)
+# test.create_group_key('search-engine-lover', g, 'ddg', "https://duckduckgo.com/?q=%s&va=b&t=hc&ia=web")
 
 # from search import search
 
